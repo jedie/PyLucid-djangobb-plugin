@@ -1,19 +1,16 @@
-from django.conf.urls.defaults import *
-from django.conf import settings
+# coding: utf-8
+
+from django.conf.urls import patterns, include
 from django.contrib import admin
 
-from sitemap import SitemapForum, SitemapTopic
-from forms import RegistrationFormUtfUsername
-from djangobb_forum import settings as forum_settings
-from django.views.generic.simple import direct_to_template
-
+#from sitemap import SitemapForum, SitemapTopic
 
 admin.autodiscover()
 
-sitemaps = {
-    'forum': SitemapForum,
-    'topic': SitemapTopic,
-}
+#sitemaps = {
+#    'forum': SitemapForum,
+#    'topic': SitemapTopic,
+#}
 
 urlpatterns = patterns('',
     # Sitemap
@@ -21,11 +18,6 @@ urlpatterns = patterns('',
 
     # Apps
     (r'^account/', include('django_authopenid.urls')),
+    (r'^pm/', include('django_messages.urls')),
     (r'^', include('djangobb_forum.urls', namespace='djangobb')),
 )
-
-# PM Extension
-if (forum_settings.PM_SUPPORT):
-    urlpatterns += patterns('',
-        (r'^pm/', include('django_messages.urls')),
-   )
