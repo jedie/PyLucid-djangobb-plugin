@@ -58,7 +58,7 @@ As the **app** select **external_plugins.djangobb_plugin** (**Not** the app ends
 
 == Links ==
 
-| PyLucid glue plugin homepage   | (comming soon)
+| PyLucid glue plugin homepage   | http://www.pylucid.org/permalink/420/how-to-install-the-djangobb-forum-as-a-plugin
 | PyLucid glue plugin sourcecode | https://github.com/jedie/PyLucid-djangobb-plugin
 | DjangoBB homepage              | http://djangobb.org/
 | DjangoBB support Forum         | http://support.djangobb.org/
