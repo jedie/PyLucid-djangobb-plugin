@@ -1,0 +1,13 @@
+#
+# Needed packages for a minimal DjangoBB installation
+#
+# from setup install_requires:
+# https://bitbucket.org/slav0nic/djangobb/src/tip/setup.py
+# 
+pil>=1.1.7
+django-haystack
+django-pagination
+postmarkup
+
+# At least only this is needed (but not in setup.py):
+Whoosh

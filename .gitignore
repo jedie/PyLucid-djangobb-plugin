@@ -1,0 +1,7 @@
+*.log
+*.pot
+*.db3
+*.pyc
+*.pyo
+.settings
+local_settings.py
