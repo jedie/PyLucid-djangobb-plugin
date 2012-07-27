@@ -1,31 +1,17 @@
-try:
-    import django_messages
-except ImportError:
-    django_messages = False
-else:
-    django_messages = True
+# coding: utf-8
 
-try:
-    import django_authopenid
-except ImportError:
-    django_authopenid = False
-else:
-    django_authopenid = True
+"""
+    attitional settings for DjangoBB
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+"""
 
 def add_settings(local_dict):
     local_dict["TEMPLATE_CONTEXT_PROCESSORS"] += (
         'djangobb_forum.context_processors.forum_settings',
+        'django_messages.context_processors.inbox',
+        'django_authopenid.context_processors.authopenid',
     )
-    if django_messages:
-        local_dict["TEMPLATE_CONTEXT_PROCESSORS"] += (
-            'django_messages.context_processors.inbox',
-        )
-    if django_authopenid:
-        local_dict["TEMPLATE_CONTEXT_PROCESSORS"] += (
-            'django_authopenid.context_processors.authopenid',
-        )
-
 
     middlewares = list(local_dict["MIDDLEWARE_CLASSES"])
 
@@ -45,11 +31,9 @@ def add_settings(local_dict):
         'pagination',
         #'djangobb_forum', # is as plugin registred
         'haystack',
+        'django_messages',
+        'django_authopenid',
     )
-    if django_messages:
-        local_dict["INSTALLED_APPS"] += ('django_messages',)
-    if django_authopenid:
-        local_dict["INSTALLED_APPS"] += ('django_authopenid',)
 
     try:
         import mailer
