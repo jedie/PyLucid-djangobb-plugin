@@ -1,3 +1,66 @@
-PyLucid glue plugin to include DjangoBB forum in PyLucid CMS
+== PyLucid 'DjangoBB forum' glue Plugin ==
 
-TODO: add information here ;)
+PyLucid glue plugin to include DjangoBB forum into PyLucid CMS.
+
+== install instuctions ==
+
+=== install DjangoBB forum ===
+
+{{{ 
+~$ mkdir pylucid_plugins
+~$ cd pylucid_plugins
+~/pylucid_plugins$ git clone git://github.com/jedie/DjangoBB.git
+~/pylucid_plugins$ ln -s ~/pylucid_plugins/DjangoBB/djangobb_forum ~/PyLucid_env/src/pylucid/pylucid_project/external_plugins/
+}}}
+Instead of use the inofficial mirror of DjangoBB you can use:
+* the official git mirror: git://github.com/slav0nic/DjangoBB.git
+* the origin hg sources at https://bitbucket.org/slav0nic/djangobb 
+
+=== install glue plugin ===
+
+{{{
+~/pylucid_plugins$ git clone git://github.com/jedie/PyLucid-djangobb-plugin.git
+~/pylucid_plugins$ ln -s ~/pylucid_plugins/PyLucid-djangobb-plugin/djangobb_plugin ~/PyLucid_env/src/pylucid/pylucid_project/external_plugins/
+}}}
+
+=== install DjangoBB dependencies ===
+
+{{{
+~$ cd PyLucid_env
+~/PyLucid_env$ source bin/activate
+(PyLucid_env)~/PyLucid_env$ pip install -r ~/pylucid_plugins/PyLucid-djangobb-plugin/requirements.txt
+}}}
+
+== setup ==
+
+=== prepare database ===
+
+{{{
+# create new database tables:
+/var/www/YourSite$ ./manage.py syncdb --all
+
+# Do faked south migrations:
+/var/www/YourSite$ ./manage.py migrate --fake
+
+# collect all static files as links
+/var/www/YourSite$ ./manage.py collectstatic --link
+}}}
+
+**Important:** restart your pylucid instance!
+
+=== create PluginPage ===
+
+To create a PluginPage use this:
+
+* //PyLucid admin menu -> create content// -> **new plugin page**
+
+As the **app** select **external_plugins.djangobb_plugin** (**Not** the app ends with **..._forum**!)
+
+== Links ==
+
+| PyLucid glue plugin homepage   | (comming soon)
+| PyLucid glue plugin sourcecode | https://github.com/jedie/PyLucid-djangobb-plugin
+| DjangoBB homepage              | http://djangobb.org/
+| DjangoBB support Forum         | http://support.djangobb.org/
+| DjangoBB sourcecode            | https://bitbucket.org/slav0nic/djangobb/
+| DjangoBB github mirror         | https://github.com/jedie/DjangoBB forum/
