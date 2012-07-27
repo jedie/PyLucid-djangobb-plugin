@@ -25,8 +25,9 @@
 					{% endif %}
 					<li id="navlogout"><a href="{% url user_signout %}?next={{ request.path }}">{% trans "Log out" %}</a></li>
 				{% else %}
-					<li><a href="{% url user_signin %}">{% trans "Log in" %}</a></li>
-					<li><a href="{% url registration_register %}">{% trans "Sign up" %}</a></li>
+				    {# If we not add the next GET parameter -> the page would be cached, but it contains the csrf_token ! #}
+					<li><a href="{% url user_signin %}?next={{ request.path }}">{% trans "Log in" %}</a></li>
+					<li><a href="{% url registration_register %}?next={{ request.path }}">{% trans "Sign up" %}</a></li>
 				{% endif %}
 				{% endblock %}
 			</ul>
