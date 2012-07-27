@@ -1,0 +1,3 @@
+PyLucid glue plugin to include DjangoBB forum in PyLucid CMS
+
+TODO: add information here ;)
