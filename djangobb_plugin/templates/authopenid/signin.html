@@ -2,6 +2,11 @@
 {% load i18n %}
 {% block extra_meta %}
 <link rel="stylesheet" href="{{ STATIC_URL }}openid/css/openid-shadow.css" />
+<style>
+#loginbox {
+    display:none;
+}    
+</style>
 <script type="text/javascript" src="{{ STATIC_URL }}openid/js/openid-jquery.js"></script>
 {% if LANGUAGE_CODE in 'de,en,jp,ru,uk' %}
 	<script type="text/javascript" src="{{ STATIC_URL }}openid/js/openid-{{ LANGUAGE_CODE }}.js"></script>
@@ -10,15 +15,26 @@
 {% endif %}
 <script type="text/javascript">
 $(document).ready(function() {
+    $("#loginbox").css("display", "block");
+    $("#info_box").css("display", "none");
     openid.init('openid_url');
 });
 </script>
-{% endblock %}
+{% endblock extra_meta %}
+
 {% block content %}
-<div class="blockform">
+<div class="blockform" id="info_box">
+    <div class="box">
+        <h1>loading...</h1>
+        <noscript><h1>Please enable Javascipt!</h1></noscript>
+    </div>
+</div>
+<div class="blockform" id="loginbox">
     <h2><span>{% trans "Login" %}</span></h2>
     <div class="box">
-		<form id="registration_form" action="." method="post">
+        <script type="text/javascript">
+        document.write('<fo'+'rm id="regist'+'ration_fo'+'rm" act'+'ion="." met'+'hod="po'+'st">');
+        </script>
 		{% csrf_token %}
 		<div class="inform">
 			{% if msg %}
@@ -45,11 +61,17 @@ $(document).ready(function() {
 		</div>
 		<p>
             <input type="hidden" name="next" value="{{ next }}" />
-            <input type="submit" value="{% trans "Login" %}" />
+            <script type="text/javascript">
+            document.write('<in'+'put type="sub'+'mit" value="{% trans "Login" %}" />');
+            </script>
         </p>
-		</form>
+        <script type="text/javascript">
+        document.write('</fo'+'rm>');
+        </script>
 
-		<form id="openid_form" name="openid_form" action="." method="post">
+        <script type="text/javascript">
+        document.write('<fo'+'rm id="openid_fo'+'rm" name="openid_fo'+'rm" act'+'ion="." met'+'hod="po'+'st">');
+        </script>
 		{% csrf_token %}
 		<fieldset>
         <input type="hidden" name="action" value="verify" />
@@ -62,10 +84,15 @@ $(document).ready(function() {
 		<div id="openid_input_area">
 		    {{ form1.openid_url.errors }}
 		    <label for="id_openid_url">OpenId URL :</label>{{ form1.openid_url }}
-		    <input name="openid_submit" type="submit" value="{% trans "Sign in with OpenID" %}" />
+		    
+            <script type="text/javascript">
+            document.write('<in'+'put name="openid_submit" type="sub'+'mit" value="{% trans "Sign in with OpenID" %}" />');
+            </script>
 		</div>
 		</fieldset>
-		</form>
+        <script type="text/javascript">
+        document.write('</fo'+'rm>');
+        </script>
     </div>
 </div>
 {% endblock %}

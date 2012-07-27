@@ -2,11 +2,33 @@
 {% load i18n %}
 {% load forum_extras %}
 
+{% block extra_meta %}
+<style>
+#loginbox {
+    display:none;
+}    
+</style>
+<script type="text/javascript">
+$(document).ready(function() {
+    $("#loginbox").css("display", "block");
+    $("#info_box").css("display", "none");
+});
+</script>
+{% endblock extra_meta %}
+
 {% block content %}
-<div class="blockform">
+<div class="blockform" id="info_box">
+    <div class="box">
+        <h1>loading...</h1>
+        <noscript><h1>Please enable Javascipt!</h1></noscript>
+    </div>
+</div>
+<div class="blockform" id="loginbox">
 	<h2><span>{% trans "Register" %}</span></h2>
 	<div class="box">
-		<form method="post" action="">
+            <script type="text/javascript">
+            document.write('<fo'+'rm act'+'ion="." met'+'hod="po'+'st">');
+            </script>	
 			{% csrf_token %}
 			<div class="inform">
 				<div class="forminfo">
@@ -45,8 +67,14 @@
 					</div>
 				</fieldset>
 			</div>
-            <p><input type="submit" value="{% trans "Register" %}" /></p>
-		</form>
+            <p>                
+                <script type="text/javascript">
+                document.write('<in'+'put type="sub'+'mit" value="{% trans "Register" %}" />');
+                </script>
+            </p>
+        <script type="text/javascript">
+        document.write('</fo'+'rm>');
+        </script>
 	</div>
 </div>
 {% endblock %}
