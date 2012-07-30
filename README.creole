@@ -63,4 +63,4 @@ As the **app** select **external_plugins.djangobb_plugin** (**Not** the app ends
 | DjangoBB homepage              | http://djangobb.org/
 | DjangoBB support Forum         | http://support.djangobb.org/
 | DjangoBB sourcecode            | https://bitbucket.org/slav0nic/djangobb/
-| DjangoBB github mirror         | https://github.com/jedie/DjangoBB forum/
+| DjangoBB github mirror         | https://github.com/jedie/DjangoBB/
