@@ -8,6 +8,9 @@ We add some templates for DjangoBB to:
 ** 'name', 'title' for the Header
 ** 'description', 'keywords' for the html meta lines
 
+TODO:
+* activate search function
+
 == install instuctions ==
 
 === install DjangoBB forum ===
