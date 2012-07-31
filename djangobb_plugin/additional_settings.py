@@ -7,6 +7,16 @@
 """
 
 def add_settings(local_dict):
+    # move templates from 'djangobb_plugin' at the top of the list
+    # So we can "overwrite" the templates form 'djangobb_forum'
+    template_dirs = list(local_dict["TEMPLATE_DIRS"])
+    for no, item in enumerate(template_dirs):
+        if "djangobb_plugin" in item:
+            template_path = template_dirs.pop(no)
+            template_dirs.insert(0, template_path)
+            local_dict['TEMPLATE_DIRS'] = tuple(template_dirs)
+            break
+
     local_dict["TEMPLATE_CONTEXT_PROCESSORS"] += (
         'djangobb_forum.context_processors.forum_settings',
         'django_messages.context_processors.inbox',
