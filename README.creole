@@ -2,6 +2,12 @@
 
 PyLucid glue plugin to include DjangoBB forum into PyLucid CMS.
 
+We add some templates for DjangoBB to:
+* Use the [[/permalink/320/the-auth-plugin-js-sha1-login|PyLucid Ajax-JS-SHA1-Login view]]
+* Use some information from [[http://www.pylucid.org/permalink/73/pylucid-related-terms-and-definitions/detail/PageMeta/|PageMeta]]:
+** 'name', 'title' for the Header
+** 'description', 'keywords' for the html meta lines
+
 == install instuctions ==
 
 === install DjangoBB forum ===
