@@ -6,16 +6,27 @@
 
 """
 
+def _search_position(l, s):
+    for index, item in enumerate(l):
+        if s in item:
+            return index
+
 def add_settings(local_dict):
-    # move templates from 'djangobb_plugin' at the top of the list
-    # So we can "overwrite" the templates form 'djangobb_forum'
+    # move templates from 'djangobb_plugin' above the origin, so we
+    # can "overwrite" the templates form 'djangobb_forum'
     template_dirs = list(local_dict["TEMPLATE_DIRS"])
-    for no, item in enumerate(template_dirs):
-        if "djangobb_plugin" in item:
-            template_path = template_dirs.pop(no)
-            template_dirs.insert(0, template_path)
-            local_dict['TEMPLATE_DIRS'] = tuple(template_dirs)
-            break
+
+    index = _search_position(template_dirs, "djangobb_plugin")
+    assert index is not None, "djangobb_plugin not in TEMPLATE_DIRS!"
+    djangobb_plugin_dir = template_dirs.pop(index)
+
+    index = _search_position(template_dirs, "djangobb_forum")
+    assert index is not None, "djangobb_forum not in TEMPLATE_DIRS!"
+    template_dirs.insert(index, djangobb_plugin_dir)
+
+    local_dict['TEMPLATE_DIRS'] = tuple(template_dirs)
+
+    #--------------------------------------------------------------------------
 
     local_dict["TEMPLATE_CONTEXT_PROCESSORS"] += (
         'djangobb_forum.context_processors.forum_settings',
@@ -23,9 +34,11 @@ def add_settings(local_dict):
         'django_authopenid.context_processors.authopenid',
     )
 
+    #--------------------------------------------------------------------------
+
     middlewares = list(local_dict["MIDDLEWARE_CLASSES"])
 
-    cache_pos = middlewares.index("pylucid_project.middlewares.cache.PyLucidFetchFromCacheMiddleware")
+    cache_pos = _search_position(middlewares, "PyLucidFetchFromCacheMiddleware")
 
     middlewares.insert(cache_pos, 'pagination.middleware.PaginationMiddleware')
     middlewares.insert(cache_pos, 'django_authopenid.middleware.OpenIDMiddleware')
@@ -36,6 +49,8 @@ def add_settings(local_dict):
 
     local_dict["MIDDLEWARE_CLASSES"] = tuple(middlewares)
 
+    #--------------------------------------------------------------------------
+
     local_dict["INSTALLED_APPS"] += (
         'registration',
         'pagination',
@@ -44,6 +59,8 @@ def add_settings(local_dict):
         'django_messages',
         'django_authopenid',
     )
+
+    #--------------------------------------------------------------------------
 
     try:
         import mailer
