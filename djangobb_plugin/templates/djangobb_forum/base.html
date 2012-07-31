@@ -13,7 +13,7 @@
 {% compress css %}
     {% set_theme_style request.user %}
     <!-- Highlightjs goodies -->
-    <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}djangobb_forum/css/pygments.css" />
+    {% lucidTag extrahead filepath="pygments.css" %}
     {% include "admin_menu/includes/superfish_extrahead.html" %}
 {% endcompress %}
    
