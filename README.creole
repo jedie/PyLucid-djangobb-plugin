@@ -19,6 +19,7 @@ We add some templates for DjangoBB to:
 ~/pylucid_plugins$ git clone git://github.com/jedie/DjangoBB.git
 ~/pylucid_plugins$ ln -s ~/pylucid_plugins/DjangoBB/djangobb_forum ~/PyLucid_env/src/pylucid/pylucid_project/external_plugins/
 }}}
+
 Instead of use the inofficial mirror of DjangoBB you can use:
 * the official git mirror: git://github.com/slav0nic/DjangoBB.git
 * the origin hg sources at https://bitbucket.org/slav0nic/djangobb 
