@@ -17,7 +17,7 @@ from pylucid_project.apps.pylucid.models.pluginpage import PluginPage
 
 
 def get_search_results(request, search_languages, search_strings, search_results):
-    groups = request.user.groups.all()
+    groups = request.user.groups.all() or []
 
     queryset = Post.objects.all()
     queryset = queryset.filter(
