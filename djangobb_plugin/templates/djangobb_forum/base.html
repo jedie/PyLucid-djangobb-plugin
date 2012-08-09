@@ -12,19 +12,18 @@
     <link rel="alternate" type="application/atom+xml" href="{% url djangobb:forum_posts_feed %}" title="{% trans "Latest posts on forum" %}" />
     <link rel="alternate" type="application/atom+xml" href="{% url djangobb:forum_topics_feed %}" title="{% trans "Latest topics on forum" %}" />   
     <link rel="shortcut icon" href="{{ STATIC_URL }}djangobb_forum/favicon.png" type="image/png" />
-   
+
 {% compress css %}
     {% set_theme_style request.user %}
     {% lucidTag extrahead filepath="pygments.css" %}
-
-{# css from "admin_menu/includes/superfish_extrahead.html" #}
-    <link rel="stylesheet" type="text/css" media="screen" href="{{ STATIC_URL }}PyLucid/superfish/superfish.css" onerror="JavaScript:alert('Error loading file ['+this.href+'] !');" />
-    <link rel="stylesheet" type="text/css" media="screen" href="{{ STATIC_URL }}PyLucid/superfish/pylucid_superfish.css" onerror="JavaScript:alert('Error loading file ['+this.href+'] !');" />
-    <style type="text/css">
-    .sf-sub-indicator {background: url('{{ STATIC_URL }}PyLucid/superfish/arrows-ffffff.png') no-repeat -10px -100px;}
-    .sf-shadow ul {background: url('{{ STATIC_URL }}PyLucid/superfish/shadow.png') no-repeat bottom right;}
-    </style>
-{% endcompress %} 
+    {# css from "admin_menu/includes/superfish_extrahead.html" #}
+        <link rel="stylesheet" type="text/css" media="screen" href="{{ STATIC_URL }}PyLucid/superfish/superfish.css" onerror="JavaScript:alert('Error loading file ['+this.href+'] !');" />
+        <link rel="stylesheet" type="text/css" media="screen" href="{{ STATIC_URL }}PyLucid/superfish/pylucid_superfish.css" onerror="JavaScript:alert('Error loading file ['+this.href+'] !');" />
+        <style type="text/css">
+        .sf-sub-indicator {background: url('{{ STATIC_URL }}PyLucid/superfish/arrows-ffffff.png') no-repeat -10px -100px;}
+        .sf-shadow ul {background: url('{{ STATIC_URL }}PyLucid/superfish/shadow.png') no-repeat bottom right;}
+        </style>
+{% endcompress %}
   
 {% compress js %}
 {# JS from DjangoBB original: #}
@@ -37,30 +36,31 @@
     {% else %}
         <script type="text/javascript" src="{{ STATIC_URL }}admin/js/jquery.min.js" onerror="JavaScript:alert('Error loading file [' + this.src + '] !');" ></script>
     {% endif %}
-    {% if user.is_authenticated %}
-        {% if post %}
-            {% with markup=post.markup %}
-                {% include "djangobb_forum/includes/markup_editor.html" %}
-            {% endwith %}
-        {% else %}
-            {% with markup=user.forum_profile.markup %}
-                {% include "djangobb_forum/includes/markup_editor.html" %}
-            {% endwith %}
-        {% endif %}
-        <script type="text/javascript">
-           $(document).ready(function() {
+    <script type="text/javascript">
+        $(document).ready(function() {
             $(".markup").markItUp(mySettings);
-           });
-        </script>
-    {% endif %}
-    
+        });
+    </script>
+   
 {# PyLucid stuff: #}    
     <script type="text/javascript" src="{{ STATIC_URL }}PyLucid/pylucid_js_tools.js" onerror="JavaScript:alert('Error loading file [{{ STATIC_URL }}PyLucid/pylucid_js_tools.js] !');"></script>
     
 {# JS from "admin_menu/includes/superfish_extrahead.html" #}
     <script type="text/javascript" src="{{ STATIC_URL }}PyLucid/superfish/superfish.js" onerror="JavaScript:alert('Error loading file ['+this.href+'] !');" ></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}PyLucid/superfish/pylucid_superfish.js" onerror="JavaScript:alert('Error loading file ['+this.href+'] !');" ></script>    
-{% endcompress %} 
+    <script type="text/javascript" src="{{ STATIC_URL }}PyLucid/superfish/pylucid_superfish.js" onerror="JavaScript:alert('Error loading file ['+this.href+'] !');" ></script>
+{% endcompress %}
+
+{% if user.is_authenticated %}
+      {% if post %}
+          {% with markup=post.markup %}
+              {% include "djangobb_forum/includes/markup_editor.html" %}
+          {% endwith %}
+      {% else %}
+          {% with markup=user.forum_profile.markup %}
+              {% include "djangobb_forum/includes/markup_editor.html" %}
+          {% endwith %}
+      {% endif %}
+{% endif %}
 </head>
 <body>
    {% include 'djangobb_forum/header.html' %}
