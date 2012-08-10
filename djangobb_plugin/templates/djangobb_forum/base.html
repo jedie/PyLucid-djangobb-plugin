@@ -56,15 +56,15 @@
 {% endcompress %}
 
 {% if user.is_authenticated %}
-      {% if post %}
-          {% with markup=post.markup %}
-              {% include "djangobb_forum/includes/markup_editor.html" %}
-          {% endwith %}
-      {% else %}
-          {% with markup=user.forum_profile.markup %}
-              {% include "djangobb_forum/includes/markup_editor.html" %}
-          {% endwith %}
-      {% endif %}
+    {% if post %}
+        {% with markup=post.markup %}
+            {% include "djangobb_forum/includes/markup_editor.html" %}
+        {% endwith %}
+    {% else %}
+        {% with markup=user.forum_profile.markup %}
+            {% include "djangobb_forum/includes/markup_editor.html" %}
+        {% endwith %}
+    {% endif %}
 {% endif %}
 </head>
 <body>
