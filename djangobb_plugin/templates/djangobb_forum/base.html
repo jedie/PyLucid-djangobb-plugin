@@ -36,12 +36,17 @@
     {% else %}
         <script type="text/javascript" src="{{ STATIC_URL }}admin/js/jquery.min.js" onerror="JavaScript:alert('Error loading file [' + this.src + '] !');" ></script>
     {% endif %}
-    <script type="text/javascript">
+    {% if user.is_authenticated %}
+        <script type="text/javascript">
         $(document).ready(function() {
-            $(".markup").markItUp(mySettings);
+            var obj=$(".markup");
+            if (obj.length==1) {
+                obj.markItUp(mySettings);
+            }
         });
-    </script>
-   
+        </script>
+    {% endif %}
+    
 {# PyLucid stuff: #}    
     <script type="text/javascript" src="{{ STATIC_URL }}PyLucid/pylucid_js_tools.js" onerror="JavaScript:alert('Error loading file [{{ STATIC_URL }}PyLucid/pylucid_js_tools.js] !');"></script>
     
