@@ -7,10 +7,12 @@ from django.contrib import admin
 
 admin.autodiscover()
 
-#sitemaps = {
-#    'forum': SitemapForum,
-#    'topic': SitemapTopic,
-#}
+try:
+    import djangobb_code_comments
+except ImportError:
+    djangobb_code_comments = False
+else:
+    djangobb_code_comments = True
 
 urlpatterns = patterns('',
     # Sitemap
@@ -21,3 +23,7 @@ urlpatterns = patterns('',
     (r'^pm/', include('django_messages.urls')),
     (r'^', include('djangobb_forum.urls', namespace='djangobb')),
 )
+if djangobb_code_comments:
+    urlpatterns += patterns('',
+        (r'^', include('djangobb_code_comments.urls')),
+    )
