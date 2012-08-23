@@ -8,16 +8,21 @@
     :license: GNU GPL v3 or above, see LICENSE for more details
 """
 
-
+from django.core.urlresolvers import NoReverseMatch
 from django.db.models import Q
 
 from djangobb_forum.models import Post
 
 from pylucid_project.apps.pylucid.models.pluginpage import PluginPage
-
+from pylucid_project.system.pylucid_plugins import PluginNotOnSite
 
 
 class Search(object):
+    def __init__(self):
+        queryset = PluginPage.objects.queryset_by_plugin_name("djangobb_plugin")
+        if not queryset.exists():
+            raise PluginNotOnSite("DjangoBB not used on current site!")
+
     def get_queryset(self, request, search_languages, search_strings):
         groups = request.user.groups.all() or []
 
