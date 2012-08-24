@@ -10,6 +10,15 @@ def _search_position(l, s):
     for index, item in enumerate(l):
         if s in item:
             return index
+    raise RuntimeError("%r not found! (error from: %s)" % (s, __file__))
+
+try:
+    import djangobb_code_comments
+except ImportError:
+    djangobb_code_comments = False
+else:
+    djangobb_code_comments = True
+
 
 def add_settings(local_dict):
     # move templates from 'djangobb_plugin' above the origin, so we
@@ -33,12 +42,16 @@ def add_settings(local_dict):
         'django_messages.context_processors.inbox',
         'django_authopenid.context_processors.authopenid',
     )
+#    if djangobb_code_comments:
+#        local_dict["TEMPLATE_CONTEXT_PROCESSORS"] += (
+#            'djangobb_code_comments.context_processors.code_comments',
+#        )
 
     #--------------------------------------------------------------------------
 
     middlewares = list(local_dict["MIDDLEWARE_CLASSES"])
 
-    cache_pos = _search_position(middlewares, "PyLucidFetchFromCacheMiddleware")
+    cache_pos = _search_position(middlewares, "FetchFromCacheMiddleware")
 
     middlewares.insert(cache_pos, 'pagination.middleware.PaginationMiddleware')
     middlewares.insert(cache_pos, 'django_authopenid.middleware.OpenIDMiddleware')
