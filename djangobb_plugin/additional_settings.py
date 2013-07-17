@@ -83,8 +83,12 @@ def add_settings(local_dict):
         pass
 
     # Haystack settings
-    local_dict["HAYSTACK_SITECONF"] = 'djangobb_plugin.search_sites'
-    local_dict["HAYSTACK_SEARCH_ENGINE"] = 'whoosh'
+    local_dict["HAYSTACK_CONNECTIONS"] = {
+        'default': {
+            'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
+            'PATH': '/tmp/djangobb_index' # FIXME: os.path.join(PROJECT_ROOT, 'djangobb_index'),
+        },
+    }
 
     # Speedup whoosh. Important if very much hits
     # http://django-haystack.readthedocs.org/en/latest/settings.html#haystack-iterator-load-per-query
