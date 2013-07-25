@@ -51,7 +51,7 @@ Instead of use the inofficial mirror of DjangoBB you can use:
 /var/www/YourSite$ ./manage.py migrate --fake
 
 # collect all static files as links
-/var/www/YourSite$ ./manage.py collectstatic --link
+/var/www/YourSite$ ./manage.py collectstatic
 }}}
 
 **Important:** restart your pylucid instance!
