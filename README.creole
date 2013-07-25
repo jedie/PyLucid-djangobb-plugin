@@ -11,6 +11,7 @@ We add some templates for DjangoBB to:
 
 == install instuctions ==
 
+
 === install DjangoBB forum ===
 
 {{{
@@ -24,12 +25,14 @@ Instead of use the inofficial mirror of DjangoBB you can use:
 * the official git mirror: git://github.com/slav0nic/DjangoBB.git
 * the origin hg sources at https://bitbucket.org/slav0nic/djangobb 
 
+
 === install glue plugin ===
 
 {{{
 ~/pylucid_plugins$ git clone git://github.com/jedie/PyLucid-djangobb-plugin.git
 ~/pylucid_plugins$ ln -s ~/pylucid_plugins/PyLucid-djangobb-plugin/djangobb_plugin ~/PyLucid_env/src/pylucid/pylucid_project/external_plugins/
 }}}
+
 
 === install DjangoBB dependencies ===
 
@@ -39,7 +42,9 @@ Instead of use the inofficial mirror of DjangoBB you can use:
 (PyLucid_env)~/PyLucid_env$ pip install -r ~/pylucid_plugins/PyLucid-djangobb-plugin/requirements.txt
 }}}
 
+
 == setup ==
+
 
 === prepare database ===
 
@@ -56,6 +61,7 @@ Instead of use the inofficial mirror of DjangoBB you can use:
 
 **Important:** restart your pylucid instance!
 
+
 === create PluginPage ===
 
 To create a PluginPage use this:
@@ -63,6 +69,16 @@ To create a PluginPage use this:
 * //PyLucid admin menu -> create content// -> **new plugin page**
 
 As the **app** select **external_plugins.djangobb_plugin** (**Not** the app ends with **..._forum**!)
+
+
+=== create forum ===
+
+You have to go into django admin and create a category and a forum under:
+* //Django admin site / Djangobb_Forum /// **Categories**
+* //Django admin site / Djangobb_Forum /// **Forums**
+
+Otherwise you will see a //'empty'// DjangoBB ;)
+
 
 == Links ==
 
