@@ -18,6 +18,6 @@ Whoosh>=2.4,<2.5
 # from requirements.txt of "djangobb_project":
 # https://bitbucket.org/slav0nic/djangobb_project/src/tip/requirements.txt
 #
-django-registration==0.8
+django-registration==3.1.2
 https://bitbucket.org/benoitc/django-authopenid/get/tip.tar.gz
 https://github.com/arneb/django-messages/tarball/master#egg=django-messages
